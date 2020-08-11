@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+//mport 'package:minhasReceitas_Flutter/models/receitaModel.dart';
 
 class ItemLista extends StatelessWidget {
+/*
+final Receita receita;
+const ItemLista({Key key, this.receita})
+    : super(key: key);
+*/
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,6 +32,9 @@ class ItemLista extends StatelessWidget {
               Row(
                 children: [
                   descCard,
+                  /*buildInfoRow(40,
+                  text: "${receita.nome}",
+                  ),*/
                 ],
               ),
               Row(
@@ -41,7 +50,7 @@ class ItemLista extends StatelessWidget {
   }
 }
 
-final descTextStyle = TextStyle( //define cor, fonte dos textos
+final descTextStyle = TextStyle( //define cor, fonte dos textos, criar um arquivo com o desc e tamanho de tela
   color: Colors.grey[100],
   fontWeight: FontWeight.w800,
   fontFamily: 'Roboto',
@@ -61,11 +70,22 @@ final imageCard = DefaultTextStyle.merge(
   )
 );
 
+Row buildInfoRow(double defaultSize, {String text}){
+  return Row(
+    children: <Widget>[
+      SizedBox(width: defaultSize),
+      Text(text,
+      style: descTextStyle,
+      ),
+    ]
+  );
+}
+
 final descCard = DefaultTextStyle.merge(
   style: descTextStyle,
   child: Column(
     children: [
-      Text('Joelho!!!'), //criar o recebimento do nome da receita
+      Text("Joelhos!"), //criar o recebimento do nome da receita
     ],
   ),
 );
