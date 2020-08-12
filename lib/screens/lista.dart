@@ -1,5 +1,3 @@
-//import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:minhasReceitas_Flutter/models/receitaModel.dart';
 import 'package:minhasReceitas_Flutter/screens/cardReceita.dart';
@@ -30,7 +28,6 @@ class ListaReceitasState extends State<ListaReceitas> {
           //return ItemReceita(receita);
         }
       ),
-      //body: ItemLista(), //necessario criar a lista
       floatingActionButton: FloatingActionButton(
         //criar o evento de apertar o botao
         onPressed: () {
@@ -55,20 +52,5 @@ class ListaReceitasState extends State<ListaReceitas> {
         widget._receitas.add(receitaRecebida);
       });
     }
-  }
-}
-
-class ItemReceita extends StatelessWidget{
-  final Receita _receita;
-  ItemReceita(this._receita);
-
-  @override
-  Widget build(BuildContext context){
-    return Card(
-      child: ListTile(
-        title: Text(_receita.nome),
-        subtitle: Text(_receita.tempoPreparo.toString()),
-      )
-    );
   }
 }

@@ -1,7 +1,7 @@
-
+/*No components/editor.dart é 
+*/
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:minhasReceitas_Flutter/screens/cardReceita.dart';
 
 class Editor extends StatelessWidget {
 final TextEditingController controlador;
@@ -22,7 +22,7 @@ const Editor({
       padding: const EdgeInsets.all(16.0),
       child: TextField(
         controller: controlador,
-        style: descTextStyle,
+        //style: descTextStyle,
         decoration: InputDecoration(
           icon: icone != null ? Icon(icone) : null,
           labelText: rotulo,

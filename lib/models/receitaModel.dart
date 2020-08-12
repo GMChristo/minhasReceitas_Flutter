@@ -1,5 +1,3 @@
-//import 'package:flutter/rendering.dart';
-
 class Receita {
   final String nome;
   final int tempoPreparo;

@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:minhasReceitas_Flutter/models/receitaModel.dart';
-//mport 'package:minhasReceitas_Flutter/models/receitaModel.dart';
 
 class ItemLista extends StatelessWidget {
   final Receita _itemReceita;
   ItemLista(this._itemReceita);
 
-/*
-final Receita receita;
-const ItemLista({Key key, this.receita})
-    : super(key: key);
-*/
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,9 +38,9 @@ const ItemLista({Key key, this.receita})
               Row(
                 children: [
                   iconesReceita(
-                    tempoPreparo: "${_itemReceita.tempoPreparo}",
-                    tempoCook: "${_itemReceita.tempoCook}",
-                    qntPorcoes: "${_itemReceita.porcoes}"),
+                      tempoPreparo: "${_itemReceita.tempoPreparo}",
+                      tempoCook: "${_itemReceita.tempoCook}",
+                      qntPorcoes: "${_itemReceita.porcoes}"),
                 ],
               ),
             ],
@@ -90,40 +84,48 @@ Row tituloReceita(double defaultSize, {String text}) {
   ]);
 }
 
-Row iconesReceita({String tempoPreparo, String tempoCook, String qntPorcoes}){
-  return Row(children: <Widget>[
-    Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        ), //cria um espaçamento do card com as laterais do mesmo
-        /*Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          child:*/
-        Column(
-          children: [
-            Icon(Icons.kitchen, color: Colors.grey[100]),
-            Text('PREP:'),
-            Text(tempoPreparo + 'min'),
-          ],
+class ColunaInformacoesCard extends StatelessWidget {
+  /*criado um widget para apresentar no card as informações da receita
+  esse widget é chamado em iconesReceita, que passa os parametros para esse widget*/
+  final IconData icone;
+  final String titulo;
+  final String valores;
+
+  const ColunaInformacoesCard({this.icone, this.titulo, this.valores});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Icon(icone, color: Colors.grey[100]),
+        Text(
+          titulo,
+          style: descTextStyle,
         ),
-        //),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: 25.0), //cria o espaçamento interno do item do meio
-          child: Column(
-            children: [
-              Icon(Icons.timer, color: Colors.grey[100]),
-              Text('COOK:'),
-              Text(tempoCook + 'hr'),
-            ],
-          ),
-        ),
-        Column(
-          children: [
-            Icon(Icons.restaurant, color: Colors.grey[100]),
-            Text('FEEDS:'),
-            Text(qntPorcoes),
-          ],
+        Text(
+          valores,
+          style: descTextStyle,
         ),
       ],
+    );
+    //)
+  }
+}
+
+Row iconesReceita({String tempoPreparo, String tempoCook, String qntPorcoes}) {
+  return Row(
+    children: <Widget>[
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+      ), //cria um espaçamento do card com as laterais do mesmo
+      ColunaInformacoesCard(
+          icone: Icons.kitchen, titulo: 'Pteste', valores: tempoPreparo),
+      Padding(
+        padding: const EdgeInsets.symmetric(
+            horizontal: 25.0), //cria o espaçamento interno do item do meio
+        child: ColunaInformacoesCard(icone: Icons.timer, titulo: 'Pcook', valores: tempoCook),
+      ),
+      ColunaInformacoesCard(icone: Icons.restaurant, titulo: 'Pporções', valores: qntPorcoes),
+    ],
   );
 }
