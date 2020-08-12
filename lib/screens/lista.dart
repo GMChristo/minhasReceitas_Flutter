@@ -26,7 +26,8 @@ class ListaReceitasState extends State<ListaReceitas> {
         itemCount: widget._receitas.length,
         itemBuilder: (context, indice){
           final receita = widget._receitas[indice];
-          return ItemReceita(receita);
+          return ItemLista(receita);
+          //return ItemReceita(receita);
         }
       ),
       //body: ItemLista(), //necessario criar a lista

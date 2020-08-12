@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:minhasReceitas_Flutter/models/receitaModel.dart';
 //mport 'package:minhasReceitas_Flutter/models/receitaModel.dart';
 
 class ItemLista extends StatelessWidget {
+  final Receita _itemReceita;
+  ItemLista(this._itemReceita);
+
 /*
 final Receita receita;
 const ItemLista({Key key, this.receita})
@@ -31,15 +35,18 @@ const ItemLista({Key key, this.receita})
             children: [
               Row(
                 children: [
-                  descCard,
-                  /*buildInfoRow(40,
-                  text: "${receita.nome}",
-                  ),*/
+                  tituloReceita(
+                    40,
+                    text: "${_itemReceita.nome}",
+                  ),
                 ],
               ),
               Row(
                 children: [
-                  iconList,
+                  iconesReceita(
+                    tempoPreparo: "${_itemReceita.tempoPreparo}",
+                    tempoCook: "${_itemReceita.tempoCook}",
+                    qntPorcoes: "${_itemReceita.porcoes}"),
                 ],
               ),
             ],
@@ -50,8 +57,10 @@ const ItemLista({Key key, this.receita})
   }
 }
 
-final descTextStyle = TextStyle( //define cor, fonte dos textos, criar um arquivo com o desc e tamanho de tela
+final descTextStyle = TextStyle(
+  //define cor, fonte dos textos, criar um arquivo com o desc e tamanho de tela
   color: Colors.grey[100],
+  //backgroundColor: Colors.red[900],
   fontWeight: FontWeight.w800,
   fontFamily: 'Roboto',
   letterSpacing: 0.5,
@@ -60,62 +69,51 @@ final descTextStyle = TextStyle( //define cor, fonte dos textos, criar um arquiv
 );
 
 final imageCard = DefaultTextStyle.merge(
-  style: descTextStyle,
-  child: Container(
-    width: 100,
-    height: 140,
-    child: ClipOval(
-      child: Image.asset('assets/images/joelho.jpg'),
-    ),
-  )
-);
-
-Row buildInfoRow(double defaultSize, {String text}){
-  return Row(
-    children: <Widget>[
-      SizedBox(width: defaultSize),
-      Text(text,
-      style: descTextStyle,
+    style: descTextStyle,
+    //TODO: verificar como mudar o background
+    child: Container(
+      //color: Colors.white,
+      width: 100,
+      height: 140,
+      child: ClipOval(
+        child: Image.asset('assets/images/noImage.png'),
       ),
-    ]
-  );
+    ));
+
+Row tituloReceita(double defaultSize, {String text}) {
+  return Row(children: <Widget>[
+    SizedBox(width: defaultSize),
+    Text(
+      text,
+      style: descTextStyle,
+    ),
+  ]);
 }
 
-final descCard = DefaultTextStyle.merge(
-  style: descTextStyle,
-  child: Column(
-    children: [
-      Text("Joelhos!"), //criar o recebimento do nome da receita
-    ],
-  ),
-);
-
-final iconList = DefaultTextStyle.merge(
-  style: descTextStyle,
-  child: Container(
-    width: 270,
-    //color: Colors.yellow[800],
-    padding: EdgeInsets.all(10), //Identa 10 pixels em cada direção
-    child: Row(
-      children: [
-        Padding(padding: const EdgeInsets.symmetric(horizontal: 15.0),),//cria um espaçamento do card com as laterais do mesmo
+Row iconesReceita({String tempoPreparo, String tempoCook, String qntPorcoes}){
+  return Row(children: <Widget>[
+    Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        ), //cria um espaçamento do card com as laterais do mesmo
         /*Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          child:*/ Column(
-            children: [
-              Icon(Icons.kitchen, color: Colors.grey[100]),
-              Text('PREP:'),
-              Text('25 min'),
-            ],
-          ),
+          child:*/
+        Column(
+          children: [
+            Icon(Icons.kitchen, color: Colors.grey[100]),
+            Text('PREP:'),
+            Text(tempoPreparo + 'min'),
+          ],
+        ),
         //),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0), //cria o espaçamento interno do item do meio
+          padding: const EdgeInsets.symmetric(
+              horizontal: 25.0), //cria o espaçamento interno do item do meio
           child: Column(
             children: [
               Icon(Icons.timer, color: Colors.grey[100]),
               Text('COOK:'),
-              Text('1 hr'),
+              Text(tempoCook + 'hr'),
             ],
           ),
         ),
@@ -123,10 +121,9 @@ final iconList = DefaultTextStyle.merge(
           children: [
             Icon(Icons.restaurant, color: Colors.grey[100]),
             Text('FEEDS:'),
-            Text('4-6'),
+            Text(qntPorcoes),
           ],
         ),
       ],
-    ),
-  ),
-);
+  );
+}

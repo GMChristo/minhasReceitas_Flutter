@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:minhasReceitas_Flutter/screens/cardReceita.dart';
+//import 'package:minhasReceitas_Flutter/screens/cardReceita.dart';
 import 'package:minhasReceitas_Flutter/screens/lista.dart';
-import 'package:minhasReceitas_Flutter/screens/receita.dart';
+//import 'package:minhasReceitas_Flutter/screens/receita.dart';
 
 void main() => runApp(MinhasReceitasApp());
 
